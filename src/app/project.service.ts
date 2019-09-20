@@ -37,20 +37,26 @@ export class ProjectService {
   ];
   constructor() { }
 
-  add(project: Project): Observable<Array<Project>> {
+  add(project: Project): Observable<Project> {
     this.projects.push(project);
-    return of(this.projects);
+    return of(project);
   }
 
-  edit(project: Project): Observable<Array<Project>> {
-    return of(this.projects.map(oldProject => oldProject.id === project.id ? project : oldProject));
+  edit(project: Project): Observable<Project> {
+    this.projects.map(oldProject => oldProject.id === project.id ? project : oldProject);
+    return of(project);
+  }
+
+  delete(project: Project): Observable<Project> {
+    this.projects.filter(oldProject => oldProject.id !== project.id);
+    return of(project);
   }
 
   get(id: number): Observable<Project> {
     return of(this.projects.find(project => project.id === id));
   }
 
-  getAll(): Observable<Array<Project>> {
-    return of(this.projects).pipe(delay(5000));
+  getAll(page: number, size: number): Observable<Array<Project>> {
+    return of(this.projects.slice(page * size, (page + 1) * size)).pipe(delay(5000));
   }
 }
