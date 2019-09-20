@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { projects } from './projects';
 
 export interface Project {
   id: number;
@@ -16,25 +17,7 @@ export interface Project {
   providedIn: 'root'
 })
 export class ProjectService {
-  private projects: Array<Project> = [
-    {
-      id: 1,
-      name: 'LimeTime',
-      date_begin: new Date(2018, 10, 1),
-      date_end: new Date(2019, 11, 25),
-      cost: 500000.00,
-      comment: 'Attempt to substitute JIRA',
-      disabled: true
-    },
-    {
-      id: 2,
-      name: 'Something',
-      date_begin: new Date(2017, 1, 1),
-      date_end: new Date(2017, 1, 28),
-      cost: 100000.00,
-      disabled: false
-    }
-  ];
+  private projects: Array<Project> = projects;
   constructor() { }
 
   add(project: Project): Observable<Project> {
@@ -57,6 +40,6 @@ export class ProjectService {
   }
 
   getAll(page: number, size: number): Observable<Array<Project>> {
-    return of(this.projects.slice(page * size, (page + 1) * size)).pipe(delay(5000));
+    return of(this.projects.slice(page * size)).pipe(delay(5000));
   }
 }
