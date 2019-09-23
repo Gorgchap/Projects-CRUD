@@ -38,7 +38,7 @@ export class ProjectService {
   }
 
   delete(project: Project): Observable<Project> {
-    this.projects.filter(oldProject => oldProject.id !== project.id);
+    this.projects = this.projects.filter(oldProject => oldProject.id !== project.id);
     return of(project);
   }
 

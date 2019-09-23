@@ -2,6 +2,18 @@
   <mat-spinner diameter="32"></mat-spinner>
 </div>
 <ng-template #fetched>
+  <button mat-icon-button class="btn-add" (click)="editRow()">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <button mat-icon-button class="btn-add" [disabled]="selection.selected.length !== 1" (click)="editRow()">
+    <mat-icon>edit</mat-icon>
+  </button>
+
+  <button mat-icon-button class="btn-delete" color="warn" [disabled]="!selection.selected.length" (click)="delete()">
+    <mat-icon>delete_outline</mat-icon>
+  </button>
+
   <table mat-table [dataSource]="displayedProjects">
     <ng-container matColumnDef="select">
       <th mat-header-cell *matHeaderCellDef>
@@ -50,5 +62,6 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
     <tr mat-footer-row *matFooterRowDef="['empty']" [hidden]="displayedProjects.length"></tr>
    </table>
+
   <mat-paginator (page)="pageChange($event)" [length]="total" [pageSizeOptions]="pagination" [pageSize]="size" [pageIndex]="page"></mat-paginator>
 </ng-template>

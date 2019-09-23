@@ -1,7 +1,8 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { MatDialog, PageEvent } from '@angular/material';
 import { Project, ProjectService } from '../project.service';
+import { ProjectEditComponent } from './project-edit/project-edit.component';
 
 @Component({
   selector: 'app-project-list',
@@ -18,7 +19,7 @@ export class ProjectListComponent implements OnInit {
   size: number = this.pagination[0];
   total = 0;
 
-  constructor(private service: ProjectService) { }
+  constructor(private service: ProjectService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.refreshProjects();
@@ -31,9 +32,25 @@ export class ProjectListComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
   }
 
+  delete() {
+    this.selection.selected.forEach(project => this.service.delete(project));
+    // this.page = Math.min(this.page, Math.ceil((this.total - this.selection.selected.length) / this.size) - 1);
+    this.refreshProjects();
+  }
+
+  editRow(element: Project | null = null) {
+    this.dialog
+      .open(ProjectEditComponent, {
+        width: '400px',
+        data: { }
+      });
+  }
+
   isAnySelected = () => this.displayedProjects.some(n => this.selection.selected.indexOf(n) > -1);
 
   isAllSelected = () => this.displayedProjects.every(n => this.selection.selected.indexOf(n) > -1);
+
+  isOneSelected = () => this.displayedProjects.filter(n => this.selection.selected.indexOf(n) > -1).length === 1;
 
   masterToggle() {
     this.isAllSelected() ? this.selection.deselect(...this.displayedProjects) : this.selection.select(...this.displayedProjects);
@@ -54,6 +71,10 @@ export class ProjectListComponent implements OnInit {
         this.page = projectResponse.page;
         this.size = projectResponse.size;
         this.displayedProjects = projectResponse.data;
+        if (this.page && !this.displayedProjects.length) {
+          this.page--;
+          this.refreshProjects();
+        }
       }
     );
   }

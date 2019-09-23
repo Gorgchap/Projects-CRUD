@@ -1,15 +1,24 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatCheckboxModule, MatPaginatorModule, MatProgressSpinnerModule, MatTableModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatIconModule,
+  MatPaginatorModule,
+  MatProgressSpinnerModule,
+  MatTableModule,
+  MatDialogModule
+} from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProjectEditComponent } from './project-list/project-edit/project-edit.component';
 
 
 @NgModule({
-  declarations: [ AppComponent, ProjectListComponent ],
+  declarations: [ AppComponent, ProjectListComponent, ProjectEditComponent ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
@@ -17,9 +26,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatCheckboxModule,
     MatTableModule,
     MatProgressSpinnerModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ProjectEditComponent]
 })
 export class AppModule { }
