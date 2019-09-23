@@ -3,3 +3,12 @@
   display: flex;
   justify-content: center;
 }
+
+.mat-table, .mat-paginator {
+  margin: 0 auto;
+  width: 50%;
+}
+
+.mat-header-cell, .mat-cell, .mat-footer-cell {
+  text-align: center;
+}

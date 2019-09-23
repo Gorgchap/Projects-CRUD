@@ -13,6 +13,13 @@ export interface Project {
   disabled: boolean;
 }
 
+export interface ProjectResponse {
+  total: number;
+  page: number;
+  size: number;
+  data: Array<Project>;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -39,7 +46,10 @@ export class ProjectService {
     return of(this.projects.find(project => project.id === id));
   }
 
-  getAll(page: number, size: number): Observable<Array<Project>> {
-    return of(this.projects.slice(page * size)).pipe(delay(5000));
+  getProjects(page: number, size: number): Observable<ProjectResponse> {
+    return of({
+      total: this.projects.length, page, size,
+      data: this.projects.slice(page * size, (page + 1) * size)
+    }).pipe(delay(0));
   }
 }
