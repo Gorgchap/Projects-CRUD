@@ -33,7 +33,7 @@ export class ProjectService {
   }
 
   edit(project: Project): Observable<Project> {
-    this.projects.map(oldProject => oldProject.id === project.id ? project : oldProject);
+    this.projects = this.projects.map(oldProject => oldProject.id === project.id ? project : oldProject);
     return of(project);
   }
 

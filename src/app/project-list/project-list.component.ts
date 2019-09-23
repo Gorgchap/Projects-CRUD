@@ -33,15 +33,14 @@ export class ProjectListComponent implements OnInit {
   }
 
   delete() {
-    this.selection.selected.forEach(project => this.service.delete(project));
-    // this.page = Math.min(this.page, Math.ceil((this.total - this.selection.selected.length) / this.size) - 1);
+    this.selection.selected.forEach(project => { this.service.delete(project); this.selection.deselect(project); });
     this.refreshProjects();
   }
 
   editRow(element: Project | null = null) {
     this.dialog
       .open(ProjectEditComponent, {
-        width: '400px',
+        width: '500px',
         data: { }
       });
   }
@@ -49,8 +48,6 @@ export class ProjectListComponent implements OnInit {
   isAnySelected = () => this.displayedProjects.some(n => this.selection.selected.indexOf(n) > -1);
 
   isAllSelected = () => this.displayedProjects.every(n => this.selection.selected.indexOf(n) > -1);
-
-  isOneSelected = () => this.displayedProjects.filter(n => this.selection.selected.indexOf(n) > -1).length === 1;
 
   masterToggle() {
     this.isAllSelected() ? this.selection.deselect(...this.displayedProjects) : this.selection.select(...this.displayedProjects);

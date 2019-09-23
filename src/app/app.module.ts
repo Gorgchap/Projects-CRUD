@@ -1,14 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import {
-  MatButtonModule,
-  MatCheckboxModule,
-  MatIconModule,
-  MatPaginatorModule,
-  MatProgressSpinnerModule,
-  MatTableModule,
-  MatDialogModule
-} from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatDialogModule, MatIconModule,
+  MatPaginatorModule, MatProgressSpinnerModule, MatTableModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -23,13 +16,13 @@ import { ProjectEditComponent } from './project-list/project-edit/project-edit.c
     BrowserModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatCheckboxModule,
-    MatTableModule,
-    MatProgressSpinnerModule,
-    MatPaginatorModule,
-    MatIconModule,
     MatButtonModule,
-    MatDialogModule
+    MatCheckboxModule,
+    MatDialogModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent],
