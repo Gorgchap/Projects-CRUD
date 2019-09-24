@@ -1,1 +1,21 @@
-<p>project-edit works!</p>
+<form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+  <h3 mat-dialog-title *ngIf="!data.id">Add new project</h3>
+  <h3 mat-dialog-title *ngIf="data.id">Edit project with id {{data.id}}</h3>
+
+  <mat-form-field class="form-field">
+    <h6>From</h6>
+  </mat-form-field>
+
+  <mat-form-field class="form-field">
+    <h6>To</h6>
+  </mat-form-field>
+
+  <mat-form-field class="form-field">
+    <h6>Cost</h6>
+  </mat-form-field>
+
+  <mat-form-field class="form-field">
+    <h6>Comment</h6>
+    <textarea matInput name="comment" formControlName="comment"></textarea>
+  </mat-form-field>
+</form>

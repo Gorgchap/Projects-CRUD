@@ -37,11 +37,11 @@ export class ProjectListComponent implements OnInit {
     this.refreshProjects();
   }
 
-  editRow(element: Project | null = null) {
+  editRow(isNew: boolean) {
     this.dialog
       .open(ProjectEditComponent, {
         width: '500px',
-        data: { }
+        data: isNew ? { } : this.selection.selected[0]
       });
   }
 

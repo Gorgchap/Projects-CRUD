@@ -2,11 +2,11 @@
   <mat-spinner diameter="32"></mat-spinner>
 </div>
 <ng-template #fetched>
-  <button mat-icon-button class="btn-add" color="primary" (click)="editRow()">
+  <button mat-icon-button class="btn-add" color="primary" (click)="editRow(true)">
     <mat-icon>add</mat-icon>
   </button>
 
-  <button mat-icon-button class="btn-add" [disabled]="selection.selected.length !== 1" (click)="editRow()">
+  <button mat-icon-button class="btn-add" [disabled]="selection.selected.length !== 1" (click)="editRow(false)">
     <mat-icon>edit</mat-icon>
   </button>
 
