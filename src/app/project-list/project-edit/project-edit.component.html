@@ -2,20 +2,33 @@
   <h3 mat-dialog-title *ngIf="!data.id">Add new project</h3>
   <h3 mat-dialog-title *ngIf="data.id">Edit project with id {{data.id}}</h3>
 
-  <mat-form-field class="form-field">
-    <h6>From</h6>
-  </mat-form-field>
+  <mat-dialog-content>
+    <mat-form-field class="form-field">
+      <input matInput [matDatepicker]="picker1" formControlName="date_begin" [placeholder]="'From'" required>
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+<!--      <mat-hint align="start"><app-input-error [field]="form.get('date_begin')"></app-input-error></mat-hint>-->
+    </mat-form-field>
 
-  <mat-form-field class="form-field">
-    <h6>To</h6>
-  </mat-form-field>
+    <mat-form-field class="form-field">
+      <input matInput [matDatepicker]="picker2" formControlName="date_end" [placeholder]="'To'" required>
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+<!--      <mat-hint align="start"><app-input-error [field]="form.get('date_end')"></app-input-error></mat-hint>-->
+    </mat-form-field>
 
-  <mat-form-field class="form-field">
-    <h6>Cost</h6>
-  </mat-form-field>
+    <mat-form-field class="form-field">
+      <input matInput type="number" name="cost" formControlName="cost" [placeholder]="'Cost'" required>
+    </mat-form-field>
 
-  <mat-form-field class="form-field">
-    <h6>Comment</h6>
-    <textarea matInput name="comment" formControlName="comment"></textarea>
-  </mat-form-field>
+    <mat-form-field class="form-field">
+      <textarea matInput name="comment" formControlName="comment" [placeholder]="'Comment'"></textarea>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-stroked-button type="button" mat-dialog-close cdkFocusInitial>Cancel</button>
+    <button mat-stroked-button *ngIf="!data.id" type="submit" color="primary" [disabled]="form.invalid || form.pristine">Add</button>
+    <button mat-stroked-button *ngIf="data.id" type="submit" color="primary" [disabled]="form.invalid || form.pristine">Edit</button>
+  </mat-dialog-actions>
 </form>
