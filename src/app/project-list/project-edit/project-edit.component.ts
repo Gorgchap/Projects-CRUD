@@ -43,5 +43,6 @@ export class ProjectEditComponent implements OnInit {
   }
 
   submit() {
+    this.dialogRef.close(this.form.value);
   }
 }

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, PageEvent } from '@angular/material';
 import { Project, ProjectService } from '../project.service';
 import { ProjectEditComponent } from './project-edit/project-edit.component';
+import { SpinnerService } from '../spinner.service';
 
 @Component({
   selector: 'app-project-list',
@@ -19,7 +20,7 @@ export class ProjectListComponent implements OnInit {
   size: number = this.pagination[0];
   total = 0;
 
-  constructor(private service: ProjectService, private dialog: MatDialog) { }
+  constructor(private service: ProjectService, private spinner: SpinnerService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.refreshProjects();
@@ -39,10 +40,17 @@ export class ProjectListComponent implements OnInit {
 
   edit(isNew: boolean) {
     this.dialog
-      .open(ProjectEditComponent, {
-        width: '500px',
-        data: isNew ? { } : this.editable()[0]
-      });
+      .open(ProjectEditComponent, { width: '500px', data: isNew ? { } : this.editable()[0] })
+      .afterClosed().subscribe(
+        result => {
+          this.spinner.open();
+          if (!result.id) {
+            this.service.add(result).subscribe(() => { this.refreshProjects(); this.spinner.close(); });
+          } else {
+            this.service.edit(result).subscribe(() => { this.refreshProjects(); this.spinner.close(); });
+          }
+        }
+      );
   }
 
   editable = () => this.displayedProjects.filter(n => this.selection.selected.indexOf(n) > -1);
