@@ -6,7 +6,7 @@
     <mat-icon>add</mat-icon>
   </button>
 
-  <button mat-icon-button class="btn-add" [disabled]="selection.selected.length !== 1" (click)="editRow(false)">
+  <button mat-icon-button class="btn-add" [disabled]="editable().length !== 1" (click)="editRow(false)">
     <mat-icon>edit</mat-icon>
   </button>
 
@@ -32,6 +32,11 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{element.name}}</td>
+    </ng-container>
+
     <ng-container matColumnDef="date_begin">
       <th mat-header-cell *matHeaderCellDef>From</th>
       <td mat-cell *matCellDef="let element">{{element.date_begin.toLocaleDateString()}}</td>
@@ -53,7 +58,7 @@
     </ng-container>
 
     <ng-container matColumnDef="empty">
-      <td mat-footer-cell *matFooterCellDef colspan="5">
+      <td mat-footer-cell *matFooterCellDef colspan="6">
         No information about projects
       </td>
     </ng-container>

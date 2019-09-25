@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
@@ -22,6 +22,7 @@ export class ProjectEditComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.builder.group( {
       id: [this.data.id],
+      name: [this.data.name, [Validators.required, Validators.maxLength(50)]],
       date_begin: [this.data.date_begin || new Date(), [Validators.required, this.dateValidator]],
       date_end: [this.data.date_end || new Date(), [Validators.required, this.dateValidator]],
       cost: [this.data.cost || 1000, [Validators.required, Validators.min(1000)]],

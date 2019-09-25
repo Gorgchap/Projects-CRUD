@@ -12,7 +12,7 @@ import { ProjectEditComponent } from './project-edit/project-edit.component';
 export class ProjectListComponent implements OnInit {
   isFetching: boolean;
   selection = new SelectionModel<Project>(true, []);
-  displayedColumns: string[] = ['select', 'date_begin', 'date_end', 'cost', 'comment'];
+  displayedColumns: string[] = ['select', 'name', 'date_begin', 'date_end', 'cost', 'comment'];
   displayedProjects: Array<Project>;
   page = 0;
   pagination: number[] = [10, 25, 50];
@@ -41,12 +41,12 @@ export class ProjectListComponent implements OnInit {
     this.dialog
       .open(ProjectEditComponent, {
         width: '500px',
-        data: isNew ? { } : this.selection.selected[0]
+        data: isNew ? { } : this.editable()[0]
       });
   }
 
+  editable = () => this.displayedProjects.filter(n => this.selection.selected.indexOf(n) > -1);
   isAnySelected = () => this.displayedProjects.some(n => this.selection.selected.indexOf(n) > -1);
-
   isAllSelected = () => this.displayedProjects.every(n => this.selection.selected.indexOf(n) > -1);
 
   masterToggle() {

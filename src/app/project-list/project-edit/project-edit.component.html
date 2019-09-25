@@ -1,15 +1,27 @@
 <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
   <h3 mat-dialog-title *ngIf="!data.id">Add new project</h3>
-  <h3 mat-dialog-title *ngIf="data.id">Edit project with id {{data.id}}</h3>
+  <h3 mat-dialog-title *ngIf="data.id">Edit project {{data.name}} (id: {{data.id}})</h3>
 
   <mat-dialog-content>
+    <mat-form-field class="form-field">
+      <input matInput name="name" formControlName="name" [placeholder]="'Name'" required>
+      <mat-hint *ngIf="form.get('name').invalid && (form.get('name').dirty || form.get('name').touched)">
+        <span *ngIf="form.get('name').errors.required">
+          Name is required
+        </span>
+        <span *ngIf="form.get('name').errors.maxlength">
+          Too long name
+        </span>
+      </mat-hint>
+    </mat-form-field>
+
     <mat-form-field class="form-field">
       <input matInput [matDatepicker]="picker1" formControlName="date_begin" [placeholder]="'From'" required>
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
       <mat-datepicker #picker1></mat-datepicker>
       <mat-hint align="start" *ngIf="form.get('date_begin').invalid && (form.get('date_begin').dirty || form.get('date_begin').touched)">
         <span *ngIf="form.get('date_begin').errors.required">
-          Field is required
+          Date of begin is required
         </span>
         <span *ngIf="form.get('date_begin').errors.dateError">
           Invalid date
@@ -23,7 +35,7 @@
       <mat-datepicker #picker2></mat-datepicker>
       <mat-hint align="start" *ngIf="form.get('date_end').invalid && (form.get('date_end').dirty || form.get('date_end').touched)">
         <span *ngIf="form.get('date_end').errors.required">
-          Field is required
+          Date of end is required
         </span>
         <span *ngIf="form.get('date_end').errors.dateError">
           Invalid date
@@ -35,7 +47,7 @@
       <input matInput type="number" name="cost" formControlName="cost" [placeholder]="'Cost'" required>
       <mat-hint align="start" *ngIf="form.get('cost').invalid && (form.get('cost').dirty || form.get('cost').touched)">
         <span *ngIf="form.get('cost').errors.required">
-          Field is required
+          Cost is required
         </span>
         <span *ngIf="form.get('cost').errors.min">
           Too little value
