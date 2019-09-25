@@ -1,4 +1,7 @@
-<div style="text-align: center">
-  <h3>Table with projects</h3>
-  <app-project-list></app-project-list>
+<div class="loading-spinner" *ngIf="isFetching; else fetched">
+  <mat-spinner diameter="48"></mat-spinner>
 </div>
+<ng-template #fetched>
+  <h3 align="center">Table with projects</h3>
+  <app-project-list></app-project-list>
+</ng-template>

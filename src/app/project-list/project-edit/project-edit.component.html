@@ -56,7 +56,7 @@
     </mat-form-field>
 
     <mat-form-field class="form-field">
-      <textarea matInput name="comment" formControlName="comment" [placeholder]="'Comment'"></textarea>
+      <textarea matInput rows="5" name="comment" formControlName="comment" [placeholder]="'Comment'"></textarea>
       <mat-hint *ngIf="form.get('comment').invalid && (form.get('comment').dirty || form.get('comment').touched)">
         <span *ngIf="form.get('comment').errors.maxlength">
           Too long comment
@@ -65,7 +65,7 @@
     </mat-form-field>
   </mat-dialog-content>
 
-  <mat-dialog-actions>
+  <mat-dialog-actions align="end">
     <button mat-stroked-button type="button" mat-dialog-close cdkFocusInitial>Cancel</button>
     <button mat-stroked-button *ngIf="!data.id" type="submit" color="primary" [disabled]="form.invalid || form.pristine">Add</button>
     <button mat-stroked-button *ngIf="data.id" type="submit" color="primary" [disabled]="form.invalid || form.pristine">Edit</button>

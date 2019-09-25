@@ -2,17 +2,19 @@
   <mat-spinner diameter="32"></mat-spinner>
 </div>
 <ng-template #fetched>
-  <button mat-icon-button class="btn-add" color="primary" (click)="editRow(true)">
-    <mat-icon>add</mat-icon>
-  </button>
+  <div style="text-align: center">
+    <button mat-icon-button class="btn-add" color="primary" (click)="edit(true)">
+      <mat-icon>add</mat-icon>
+    </button>
 
-  <button mat-icon-button class="btn-add" [disabled]="editable().length !== 1" (click)="editRow(false)">
-    <mat-icon>edit</mat-icon>
-  </button>
+    <button mat-icon-button class="btn-add" [disabled]="editable().length !== 1" (click)="edit(false)">
+      <mat-icon>edit</mat-icon>
+    </button>
 
-  <button mat-icon-button class="btn-delete" color="warn" [disabled]="!selection.selected.length" (click)="delete()">
-    <mat-icon>delete_outline</mat-icon>
-  </button>
+    <button mat-icon-button class="btn-delete" color="warn" [disabled]="!selection.selected.length" (click)="delete()">
+      <mat-icon>delete_outline</mat-icon>
+    </button>
+  </div>
 
   <table mat-table [dataSource]="displayedProjects">
     <ng-container matColumnDef="select">

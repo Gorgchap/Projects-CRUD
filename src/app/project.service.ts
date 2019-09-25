@@ -50,6 +50,6 @@ export class ProjectService {
     return of({
       total: this.projects.length, page, size,
       data: this.projects.slice(page * size, (page + 1) * size)
-    }).pipe(delay(0));
+    }).pipe(delay(100));
   }
 }

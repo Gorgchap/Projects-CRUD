@@ -37,7 +37,7 @@ export class ProjectListComponent implements OnInit {
     this.refreshProjects();
   }
 
-  editRow(isNew: boolean) {
+  edit(isNew: boolean) {
     this.dialog
       .open(ProjectEditComponent, {
         width: '500px',
